@@ -1,21 +1,25 @@
+#Updated print game Board function
 def printGameBoard(gameBoard):
-    print("|"+gameBoard[43]+"|"+gameBoard[44]+"|"+gameBoard[45]+"|"+gameBoard[46]+"|"+gameBoard[47]+"|"+gameBoard[48]+"|"+gameBoard[49]+"|")
-    print("|"+gameBoard[36]+"|"+gameBoard[37]+"|"+gameBoard[38]+"|"+gameBoard[39]+"|"+gameBoard[40]+"|"+gameBoard[41]+"|"+gameBoard[42]+"|")
-    print("|"+gameBoard[29]+"|"+gameBoard[30]+"|"+gameBoard[31]+"|"+gameBoard[32]+"|"+gameBoard[33]+"|"+gameBoard[34]+"|"+gameBoard[35]+"|")
-    print("|"+gameBoard[22]+"|"+gameBoard[23]+"|"+gameBoard[24]+"|"+gameBoard[25]+"|"+gameBoard[26]+"|"+gameBoard[27]+"|"+gameBoard[28]+"|")
-    print("|"+gameBoard[15]+"|"+gameBoard[16]+"|"+gameBoard[17]+"|"+gameBoard[18]+"|"+gameBoard[19]+"|"+gameBoard[20]+"|"+gameBoard[21]+"|")
-    print("|"+gameBoard[8]+"|"+gameBoard[9]+"|"+gameBoard[10]+"|"+gameBoard[11]+"|"+gameBoard[12]+"|"+gameBoard[13]+"|"+gameBoard[14]+"|")
-    print("|"+gameBoard[1]+"|"+gameBoard[2]+"|"+gameBoard[3]+"|"+gameBoard[4]+"|"+gameBoard[5]+"|"+gameBoard[6]+"|"+gameBoard[7]+"|")
+    line =''
+    for r in range(rows, 0,-1):
+        line =line + "|"
+        for c in range(1, columns+1 ,1):
+            line = line + gameBoard["R"+ str(r) + "C" + str(c)]+"|"
+        line = line +'\n'
+    print(line)
 
+#Number of rows and columns
+rows = 6
+columns = 7
+gameBoard ={ }
+#Create gameBoard based on number of rows and columns
+for c in range(1, columns+1, 1):
+    for r in range(1, rows+1, 1):
+        gameBoard["R"+str(r)+"C"+str(c)] =" "
+        
+print(gameBoard)
+        
 
-    
-gameBoard = {1: " ", 2: " ", 3: " ", 4: " ", 5: " ", 6: " ", 7: " ",
-             8: " ", 9: " ", 10: " ", 11: " ", 12: " ", 13: " ", 14: " ",
-             15: " ", 16: " ", 17: " ", 18: " ",19: " ", 20: " ", 21: " ",
-             22: " ", 23: " ", 24: " ", 25: " ", 26: " ", 27: " ", 28: " ",
-             29: " ", 30: " ", 31: " ", 32: " ", 33: " ", 34: " ", 35: " ",
-             36: " ", 37: " ", 38: " ", 39: " ", 40: " ", 41: " ", 42: " ",
-             43: " ", 44: " ", 45: " ", 46: " ", 47: " ", 48: " ", 49: " "}
 for i in range(50):
     if i % 2 ==0:
         turn ="Z"
