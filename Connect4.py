@@ -17,7 +17,7 @@ for c in range(1, columns+1, 1):
     for r in range(1, rows+1, 1):
         gameBoard["R"+str(r)+"C"+str(c)] =" "
         
-print(gameBoard)
+printGameBoard(gameBoard)
         
 
 for i in range(50):
@@ -35,110 +35,91 @@ for i in range(50):
     intColumn =int(column)
     
     #place piece in first empty space
-    for k in range(7):
-        space = intColumn + (k * 7)
-        print("K = " + str(k))
-        print("Space = " + str(space))
+    for r in range(1, rows+1, 1):
+        print("R =" + str(r))
+        space = "R"+str(r)+"C"+str(intColumn)
+        print(space)
         if gameBoard[space] ==" ":
             gameBoard[space] = turn
-            print(gameBoard[space])
+            printGameBoard(gameBoard)
             break
 
     numConnected = 0
     #Check for 4 in a row horizontal
-    for h in range(space, (7-(6+space)%7+space), 1):
-        
-        print(gameBoard[h])
-        if gameBoard[h] == turn:
+    for c in range(intColumn, columns+1, 1):
+        if gameBoard.get("R"+str(r)+"C"+str(c)) == turn:
             numConnected += 1
-            #print("H Match :"+str(numConnected))
         else:
             break
-    for hr in range(space-1,space-1-(space-1)%7,-1):      
-        if gameBoard[hr] == turn:
+    for cr in range(intColumn-1,0,-1):
+        if gameBoard.get("R"+str(r)+"C"+str(cr)) == turn:
             numConnected += 1
-            #print("HR Match :" +str(numConnected))
         else:
             break
 
     if numConnected >= 4:
         printGameBoard(gameBoard)
-        print("Player "+ turn+" wins!")
+        print("Player "+ turn+" wins horizontally!")
         break
         
     numConnected =0
     #Check for 4 in a row vertical
-    for v in range(space, 50, 7):
-        if gameBoard[v] == turn:    
+    for vr in range(r, 0, -1):
+        if gameBoard.get("R"+str(vr)+"C"+str(intColumn)) == turn:    
             numConnected += 1
-            #print("V Match: " + str(numConnected))
-        else:
-            break
-    for vr in range(space-7, 0, -7):
-        if gameBoard[vr] == turn:    
-            numConnected += 1
-            #print("VR Match: " + str(numConnected))
         else:
             break
     if numConnected >= 4:
         printGameBoard(gameBoard)
-        print("Player "+ turn+" wins!")
+        print("Player "+ turn+" wins vertically!")
         break
+
         
     numConnected =0
+    dc = intColumn
+    #Check for 4 in a row diagonally bottom left to top right
+    for dr in range(r,rows+1,1):
+        print("in DR  dc ="+str(dc) + " dr ="+str(dr))
+        if gameBoard.get("R"+str(dr)+"C"+str(dc)) == turn:
+            numConnected += 1
+            dc+=1
+        else:
+            break
+    dc = intColumn -1
+    for dr in range(r-1,0,-1):
+        print("in DR  dc ="+str(dc) + " dr ="+str(dr))
+        if gameBoard.get("R"+str(dr)+"C"+str(dc)) == turn:
+            numConnected += 1
+            dc-=1
+        else:
+            break
 
-    #Check for 4 in a row diagonally left to right from bottom to top
-    for d in range(space, 50, 8):
-        if space in(7,6,14,5,13,21,43,36,44,29,37,45):
-            break
-        else:
-            print("d = " + str(d))
-            if gameBoard[d] ==turn:
-                numConnected += 1
-                #print("D Match: " + str(numConnected))
-            else:
-                break
-    for dr in range(space-8,0,-8):
-        if space in(7,6,14,5,13,21,43,36,44,29,37,45):
-            break
-        else:
-            print("dr = " + str(dr))
-            if gameBoard[dr] == turn:
-                numConnected +=1
-                #print("DR Match: " +str(numConnected))
-            else:
-                break
+            
     if numConnected >= 4:
         printGameBoard(gameBoard)
-        print("Player "+ turn+" wins!")
+        print("Player "+ turn+" wins diagonally!")
         break
 
     numConnected =0
-
-    #Check for 4 in a row diagonally
-    for dl in range(space, 44, 6):
-        if space in(1,2,3,8,9,15,49,48,42,47,41,35):
-            break
+    dc = intColumn
+    #Check for 4 in a row diagonally top left to bottom right
+    for dr in range(r,0,-1):
+        print("in DR  dc ="+str(dc) + " dr ="+str(dr))
+        if gameBoard.get("R"+str(dr)+"C"+str(dc)) == turn:
+            numConnected += 1
+            dc+=1
         else:
-            print("dl = " + str(dl))
-            if gameBoard[dl] ==turn:
-                numConnected += 1
-                print("DL Match: " + str(numConnected))
-            else:
-                break
-    for dlr in range(space-6,3,-6):
-        if space in(1,2,3,8,9,15,49,48,42,47,41,35):
             break
+    dc = intColumn -1
+    for dr in range(r+1,rows+1,1):
+        print("in DR  dc ="+str(dc) + " dr ="+str(dr))
+        if gameBoard.get("R"+str(dr)+"C"+str(dc)) == turn:
+            numConnected += 1
+            dc-=1
         else:
-            print("dlr = " + str(dlr))
-            if gameBoard[dlr] == turn:
-                numConnected +=1
-                print("DLR Match: " +str(numConnected))
-            else:
-                break
+            break
     if numConnected >= 4:
         printGameBoard(gameBoard)
-        print("Player "+ turn+" wins!")
+        print("Player "+ turn+" wins diagonally!")
         break
-    
-    printGameBoard(gameBoard)
+
